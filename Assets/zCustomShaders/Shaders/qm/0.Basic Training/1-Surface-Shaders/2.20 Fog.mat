@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 2.20 Fog
+  m_Shader: {fileID: 4800000, guid: d10af3b2a536f284989540c85cf4d9cb, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 2000
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpTex:
+        m_Texture: {fileID: -842962501, guid: 437a7d1a25251124e923e1c4c45548a4, type: 3}
+        m_Scale: {x: 3, y: 3}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Detail:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2067874185, guid: 64c63159b96292246b2ce26358b8f6b6, type: 3}
+        m_Scale: {x: 3, y: 3}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Amount: -0.02
+    - _BumpTexIntensity: 1
+    - _CubeTexIntensity: 0.5
+    - _MainTexIntensity: 1
+    m_Colors:
+    - _ColorTint: {r: 0.6416956, g: 0.43901384, b: 0.85294116, a: 1}
+    - _FogColor: {r: 0.09731836, g: 0.66176474, b: 0.124567404, a: 1}
+    - _MainColor: {r: 0.99264705, g: 0.6568988, b: 0.6568988, a: 1}
