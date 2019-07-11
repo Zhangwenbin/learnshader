@@ -1,4 +1,4 @@
-﻿Shader "Custom/Ramp" {
+﻿Shader "zwb/surface/Ramp" {
     Properties{
 		_MainTex("tex",2D)="white"{}
 		_BumpTex("bump",2D)="white"{}

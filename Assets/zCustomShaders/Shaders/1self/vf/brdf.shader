@@ -1,12 +1,13 @@
-﻿Shader "Custom/Unlit/brdf"
+﻿Shader "zwb/vf/brdf"
 {
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
 		_TinColor("color",Color)=(1,1,1,1)
+		Ka("ka",Range(0,1))=1
 		Kd("kd",Range(0,1))=1
-		Ks("ks",Range(0,1))=1
-		shin("shinin",Range(0,10))=1
+		Ks("ks",Range(0,1))=0.3
+		shin("shinin",Range(0,10))=6
 	}
 	SubShader
 	{
@@ -40,6 +41,8 @@
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
 		    float4 _TinColor;
+
+            float Ka;
 			float Kd;
 			float Ks;
 			float shin;
@@ -56,9 +59,13 @@
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
+				
 				// sample the texture
 				fixed4 col = tex2D(_MainTex, i.uv);
-				float3 lightDir=normalize(UnityWorldSpaceLightDir(i.wPos));
+
+				float3 ambient=col.rgb*UNITY_LIGHTMODEL_AMBIENT.xyz*col.rgb;
+
+				float3 lightDir=-normalize(UnityWorldSpaceLightDir(i.wPos));
 				float3 viewDir=normalize(UnityWorldSpaceViewDir(i.wPos));
                 float nl=dot(lightDir,i.wNormal);				
 				float diff=max(nl,0);
@@ -80,7 +87,7 @@
 				}
 
 
-				return float4(diffColor+speColor,1);
+				return float4(ambient+diffColor+speColor,1);
 			}
 			ENDCG
 		}

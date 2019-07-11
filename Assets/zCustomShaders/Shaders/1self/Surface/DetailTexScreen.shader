@@ -1,4 +1,4 @@
-﻿Shader "Custom/DetailTexScreen" {
+﻿Shader "zwb/surface/DetailTexScreen" {
     Properties{
 		_MainTex("tex",2D)="black"{}
 		_BumpTex("bump",2D)="white"{}

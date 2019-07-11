@@ -1,4 +1,4 @@
-﻿Shader "Custom/Transparent" {
+﻿Shader "zwb/surface/Transparent" {
     Properties{
 		_MainTex("tex",2D)="white"{}
 		_BumpTex("bump",2D)="white"{}

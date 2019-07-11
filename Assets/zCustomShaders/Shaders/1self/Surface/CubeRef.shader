@@ -1,4 +1,4 @@
-﻿Shader "Custom/CubeRef" {
+﻿Shader "zwb/surface/CubeRef" {
     Properties{
 		_MainTex("tex",2D)="white"{}
 		_Bump("bump",2D)="white"{}

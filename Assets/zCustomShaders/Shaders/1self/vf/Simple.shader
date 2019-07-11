@@ -1,15 +1,16 @@
-﻿Shader "Custom/Unlit/Simple"
+﻿Shader "zwb/vf/Simple"
 {
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
 		_TinColor("color",Color)=(1,1,1,1)
-			Ks("ks",Range(0,1))=1
+		Ka("ka",Range(0,1))=1
+		Kd("kd",Range(0,1))=1
+		Ks("ks",Range(0,1))=1
 	}
 	SubShader
 	{
 		Tags { "RenderType"="Opaque" }
-		LOD 100
 
 		Pass
 		{
@@ -37,9 +38,11 @@
 
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
-			   float4 _TinColor;
+			float4 _TinColor;
 
-				float Ks;
+			float Ka;
+			float Kd;
+			float Ks;
 			
 			v2f vert (appdata v)
 			{
@@ -54,20 +57,22 @@
 			fixed4 frag (v2f i) : SV_Target
 			{
 				// sample the texture
+				float3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz*Ka;
+
 				fixed4 col = tex2D(_MainTex, i.uv);
-				float3 lightDir=normalize(UnityWorldSpaceLightDir(i.wPos));
+				float3 lightDir=-normalize(_WorldSpaceLightPos0.xyz);
+				//float3 lightDir=normalize(UnityWorldSpaceLightDir(i.wPos));
 				float3 viewDir=normalize(UnityWorldSpaceViewDir(i.wPos));
                 float ln=dot(lightDir,i.wNormal);				
-				float diff=max(ln,0.2);
-
-				float3 diffColor=diff*_LightColor0.rgb*_TinColor;
+				float diff=max(ln,0);
+				float3 diffColor=diff*_LightColor0.rgb*_TinColor*Kd;
 
 				float3 h=normalize(lightDir+viewDir);
 				float nh=max(0,dot(i.wNormal,h));
 				float spe=pow(nh,1024);
 				float3 speColor=spe*_LightColor0.rgb*Ks;
 
-				return float4(col.rgb*(diffColor)+speColor,1);
+				return float4(col.rgb*(diffColor+ambient)+speColor,1);
 			}
 			ENDCG
 		}

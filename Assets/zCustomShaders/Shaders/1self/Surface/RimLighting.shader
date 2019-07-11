@@ -1,4 +1,4 @@
-﻿Shader "Custom/RimLighting" {
+﻿Shader "zwb/surface/RimLighting" {
     Properties{
 		_MainTex("tex",2D)="white"{}
 		_BumpTex("bump",2D)="white"{}

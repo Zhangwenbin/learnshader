@@ -1,4 +1,4 @@
-﻿Shader "Custom/BumpTex" {
+﻿Shader "zwb/surface/BumpTex" {
     Properties{
 		_MainTex("tex",2D)="white"{}
 		_BumpTex("bump",2D)="white"{}

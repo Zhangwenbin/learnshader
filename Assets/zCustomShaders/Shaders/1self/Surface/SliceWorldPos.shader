@@ -1,4 +1,4 @@
-﻿Shader "Custom/SliceWorldPos" {
+﻿Shader "zwb/surface/SliceWorldPos" {
     Properties{
 		_MainTex("tex",2D)="white"{}
 		_BumpTex("bump",2D)="white"{}

@@ -1,4 +1,4 @@
-﻿Shader "Custom/Fog" {
+﻿Shader "zwb/surface/Fog" {
     Properties{
 		_MainTex("tex",2D)="white"{}
 		_BumpTex("bump",2D)="white"{}

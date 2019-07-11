@@ -1,4 +1,4 @@
-﻿Shader "Custom/TEXTURE" {
+﻿Shader "zwb/surface/TEXTURE" {
     Properties{
 		_MainTex("tex",2D)="white"{}
 	}
