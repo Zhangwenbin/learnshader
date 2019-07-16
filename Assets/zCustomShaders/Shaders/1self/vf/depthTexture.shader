@@ -37,17 +37,16 @@ Shader "zwb/vf/depthTexture"
 			{
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
-				o.depth=mul(UNITY_MATRIX_MV,v.vertex).zw;
+			     //UNITY_TRANSFER_DEPTH(o.depth);
+				 o.depth=o.vertex.zw;
 				return o;
 			}
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				float d=i.depth.x/i.depth.y;
-				// d=d*0.5+0.5;
-				float3 depthColor=EncodeFloatRGBA(d);
-						
-				return float4(depthColor,1);
+				 float d=i.depth.x/i.depth.y-4/i.depth.y;
+				//d=Linear01Depth(d);
+				return EncodeFloatRGBA(d);
 			}
 			ENDCG
 		}

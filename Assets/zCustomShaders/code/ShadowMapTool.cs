@@ -7,6 +7,7 @@ public class ShadowMapTool : MonoBehaviour {
     private RenderTexture rt;
     Matrix4x4 gm;
 
+    public Camera dcamera;
     // Use this for initialization
     void Start () {
         mcamera = GetComponent<Camera> ( );
@@ -25,7 +26,7 @@ public class ShadowMapTool : MonoBehaviour {
         gm.SetRow ( 1, new Vector4 ( 0   , 0.5f, 0, 0.5f ) );
         gm.SetRow ( 2, new Vector4 ( 0   , 0, 1   , 0 ) );
         gm.SetRow ( 3, new Vector4 ( 0f  , 0, 0   , 1 ) );
-
+      //  dcamera.depthTextureMode = DepthTextureMode.Depth;
         mcamera.SetReplacementShader ( Shader.Find ( "zwb/vf/depthTexture" ), "RenderType" );
         }
 	
@@ -35,7 +36,6 @@ public class ShadowMapTool : MonoBehaviour {
         mcamera.Render ( );
         Shader.SetGlobalTexture ( "depthTex", rt );
         Matrix4x4 tm = GL.GetGPUProjectionMatrix(mcamera.projectionMatrix, false) * mcamera.worldToCameraMatrix;
-        tm = gm * tm;
         Shader.SetGlobalMatrix ( "shadowMatrix", mcamera.worldToCameraMatrix );
         }
     

@@ -60,7 +60,7 @@
 				float3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz*Ka;
 
 				fixed4 col = tex2D(_MainTex, i.uv);
-				float3 lightDir=-normalize(_WorldSpaceLightPos0.xyz);
+				float3 lightDir=normalize(_WorldSpaceLightPos0.xyz);
 				//float3 lightDir=normalize(UnityWorldSpaceLightDir(i.wPos));
 				float3 viewDir=normalize(UnityWorldSpaceViewDir(i.wPos));
                 float ln=dot(lightDir,i.wNormal);				
