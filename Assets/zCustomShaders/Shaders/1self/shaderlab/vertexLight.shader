@@ -1,4 +1,4 @@
-﻿Shader "zwb/vf/vertexLight"
+﻿Shader "zwb/shaderlab/vertexLight"
 {
 	Properties
 	{

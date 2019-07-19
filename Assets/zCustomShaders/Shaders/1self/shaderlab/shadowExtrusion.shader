@@ -1,10 +1,10 @@
-﻿Shader "zwb/shaderlab/forwardLight"
+﻿Shader "zwb/shaderlab/shadowExtrusion"
 {
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
 		_TinColor("color",Color)=(1,1,1,1)
-		Ka("ka",Range(0,1))=1
+		Ka("ka",float)=1
 		Kd("kd",Range(0,1))=1
 		Ks("ks",Range(0,1))=1
 	}
@@ -14,12 +14,16 @@
 		Pass
 		{
 			Tags { "RenderType"="Opaque" "LightMode"="ForwardBase" }
+			Cull back
+		
+			ColorMask R
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
 			
 			#include"Lighting.cginc"
 			#include "UnityCG.cginc"
+			
 
 
 			struct appdata
@@ -32,7 +36,7 @@
 			struct v2f
 			{
 				float4 vertex : SV_POSITION;
-				float3 color:COLOR;
+				float4 color:COLOR;
 				
 			};
 
@@ -48,23 +52,25 @@
 			{
 					
 	            v2f o;
-				o.vertex = UnityObjectToClipPos(v.vertex);
-				o.color=Shade4PointLights (unity_4LightPosX0, unity_4LightPosY0, 
-				unity_4LightPosZ0,unity_LightColor[0].rgb, 
-				unity_LightColor[1].rgb, unity_LightColor[2].rgb,
-				 unity_LightColor[3].rgb,unity_4LightAtten0,mul(unity_ObjectToWorld, v.vertex).xyz, 
-				 UnityObjectToWorldNormal(v.normal));
 				
+				float3 litDir=UnityWorldSpaceLightDir(v.vertex);
+				float backF=dot(normalize(litDir) ,UnityObjectToWorldNormal(v.vertex));
+				o.color=_LightColor0*max(0.1,backF);
+                float extrusion=backF<0?1:0;
+				litDir=mul((float3x3)unity_WorldToObject,litDir);
+				litDir=normalize(litDir);
+				v.vertex-=float4(litDir,1)*Ka*extrusion ;
+                o.vertex = UnityObjectToClipPos(v.vertex);
 				return o;
 			}
-
-
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				return float4( i.color+_LightColor0,1);
+				return i.color;
 			}
 			ENDCG
+			SetTexture[_MainTex] {ConstantColor(1,1,1,1) Combine constant}
 		}
+
 	}
 }

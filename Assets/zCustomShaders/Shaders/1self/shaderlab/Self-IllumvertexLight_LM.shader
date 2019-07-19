@@ -1,4 +1,4 @@
-﻿Shader "Self-Illumzwb/vf/vertexLight_LM"
+﻿Shader "Self-Illumzwb/shaderlab/vertexLight_LM"
 {
 	Properties
 	{
