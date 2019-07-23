@@ -7,7 +7,7 @@
 		Ka("ka",Range(0,1))=1
 		Kd("kd",Range(0,1))=1
 		Ks("ks",Range(0,1))=1
-		R("r",Range(1,10))=1
+		R("r",Range(0,10))=1
 	}
 	SubShader
 	{
@@ -54,7 +54,7 @@
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				o.wNormal=normalize(UnityObjectToWorldNormal(v.normal));
 				o.wPos=mul(unity_ObjectToWorld,v.vertex).xyz;
-				o.wPos.y=sin(distance(float2(0,0),o.wPos.xz)*R+_Time.z);
+				o.wPos.y=sin((distance(float2(0,0),o.wPos.xz)*R-_Time.z)%360);
 				v.vertex=mul(unity_WorldToObject,float4(o.wPos,1));
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				return o;
