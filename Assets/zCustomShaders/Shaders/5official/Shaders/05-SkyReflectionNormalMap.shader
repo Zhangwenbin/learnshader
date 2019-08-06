@@ -26,6 +26,7 @@ Shader "Unlit/SkyReflection Per Pixel"
                 // texture coordinate for the normal map
                 float2 uv : TEXCOORD4;
                 float4 pos : SV_POSITION;
+                float3 wNormal:TEXCOORD5;
             };
 
             // vertex shader now also needs a per-vertex tangent vector.
@@ -47,6 +48,7 @@ Shader "Unlit/SkyReflection Per Pixel"
                 o.tspace1 = half3(wTangent.y, wBitangent.y, wNormal.y);
                 o.tspace2 = half3(wTangent.z, wBitangent.z, wNormal.z);
                 o.uv = uv;
+                o.wNormal=wNormal;
                 return o;
             }
 
