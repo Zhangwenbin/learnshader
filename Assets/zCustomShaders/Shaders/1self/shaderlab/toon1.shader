@@ -125,7 +125,6 @@
 			fixed4 frag (v2f i) : SV_Target
 			{
 				float diff=max(0,dot(i.normal,i.lightDir));
-				diff=diff*0.5+0.5;
 				diff=smoothstep(0,1,diff);
 				float toon=floor(diff*_steps)/_steps;
 				diff=lerp(diff,toon,_toonFactor);
