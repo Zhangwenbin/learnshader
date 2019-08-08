@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class test : MonoBehaviour {
 
-    public Camera mcamera;
+    public Vector3 pos;
+    public Quaternion rotation;
+    public Vector3 scale;
+
+    public Vector3 target;
 	// Use this for initialization
 	void Start () {
 		
@@ -12,10 +16,9 @@ public class test : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        var vp=mcamera.projectionMatrix*mcamera.worldToCameraMatrix;
-        var ivp=vp.inverse;
-       // Debug.LogError ( vp.MultiplyPoint ( transform.position ) );
-
+        rotation = transform.rotation;
+        Matrix4x4 m=Matrix4x4.TRS(pos,rotation,scale);
+        transform.position = m.MultiplyPoint3x4 ( target );
 
     }
 }
