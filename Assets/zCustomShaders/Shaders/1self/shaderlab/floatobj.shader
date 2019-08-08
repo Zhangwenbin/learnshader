@@ -63,7 +63,7 @@
 		}
 
 				Pass
-		{
+		{ 
 			Cull front 
 			ZTest greater
 			Blend oneminusdstalpha one
