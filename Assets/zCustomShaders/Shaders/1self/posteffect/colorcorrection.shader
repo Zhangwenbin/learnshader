@@ -50,6 +50,8 @@
 				float green=tex2D(rgbtex,half2(col.g,1.5/4)).rgb*fixed3(0,1,0).g;
 				float blue=tex2D(rgbtex,half2(col.b,2.5/4)).rgb*fixed3(0,0,1).b;
 
+				//return float4(col.rgb*0.5,col.a);
+
 				return float4(red,green,blue,col.a);
 
 				
